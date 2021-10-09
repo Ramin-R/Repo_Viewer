@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/core/presentation/toasts.dart';
 import 'package:repo_viewer/github/core/presentation/no_results_display.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
-import 'package:repo_viewer/github/repos/starred_repos/application/starred_repos_notifier.dart';
+import 'package:repo_viewer/github/repos/core/application/paginated_repos_notifier.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/loading_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/repo_tile.dart';
@@ -24,7 +24,7 @@ class _PaginatedReposListViewState extends State<PaginatedReposListView> {
     return Consumer(
       builder: (context, ref, child) {
         final state = ref.watch(starredReposNotifierProvider);
-        return ProviderListener<StarredReposState>(
+        return ProviderListener<PaginatedReposState>(
           provider: starredReposNotifierProvider,
           onChange: (context, state) {
             state.map(
@@ -72,7 +72,7 @@ class _PaginatedReposListViewState extends State<PaginatedReposListView> {
 class _PaginatedListView extends StatelessWidget {
   const _PaginatedListView({Key? key, required this.state}) : super(key: key);
 
-  final StarredReposState state;
+  final PaginatedReposState state;
 
   @override
   Widget build(BuildContext context) {
