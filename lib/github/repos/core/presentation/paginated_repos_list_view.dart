@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/core/presentation/toasts.dart';
 import 'package:repo_viewer/github/core/presentation/no_results_display.dart';
-import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/core/application/paginated_repos_notifier.dart';
-import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo_tile.dart';
-import 'package:repo_viewer/github/repos/starred_repos/presentation/loading_repo_tile.dart';
-import 'package:repo_viewer/github/repos/starred_repos/presentation/repo_tile.dart';
+import 'package:repo_viewer/github/repos/core/presentation/failure_repo_tile.dart';
+import 'package:repo_viewer/github/repos/core/presentation/repo_tile.dart';
+
+import 'loading_repo_tile.dart';
 
 class PaginatedReposListView extends StatefulWidget {
-  const PaginatedReposListView({Key? key}) : super(key: key);
+  final StateNotifierProvider<PaginatedReposNotifier, PaginatedReposState> reposNotifierProvider;
+  final void Function(BuildContext context) getNextPage;
+  final String noResultsMessage;
+
+  const PaginatedReposListView({
+    Key? key,
+    required this.reposNotifierProvider,
+    required this.getNextPage,
+    required this.noResultsMessage,
+  }) : super(key: key);
 
   @override
   State<PaginatedReposListView> createState() => _PaginatedReposListViewState();
@@ -23,9 +32,9 @@ class _PaginatedReposListViewState extends State<PaginatedReposListView> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final state = ref.watch(starredReposNotifierProvider);
+        final state = ref.watch(widget.reposNotifierProvider);
         return ProviderListener<PaginatedReposState>(
-          provider: starredReposNotifierProvider,
+          provider: widget.reposNotifierProvider,
           onChange: (context, state) {
             state.map(
               initial: (_) => canLoadNextPage = false,
@@ -50,7 +59,7 @@ class _PaginatedReposListViewState extends State<PaginatedReposListView> {
               final limit = metrics.maxScrollExtent - metrics.viewportDimension / 3;
               if (canLoadNextPage && metrics.pixels >= limit) {
                 canLoadNextPage = false;
-                context.read(starredReposNotifierProvider.notifier).getNextStarredReposPage();
+                widget.getNextPage(context);
               }
               return false;
             },
@@ -58,8 +67,8 @@ class _PaginatedReposListViewState extends State<PaginatedReposListView> {
               loadSuccess: (repos, _) => repos.entity.isEmpty,
               orElse: () => false,
             )
-                ? const NoResultsDisplay(
-                    message: "That's about everything we could find in your starred repos.",
+                ? NoResultsDisplay(
+                    message: widget.noResultsMessage,
                   )
                 : _PaginatedListView(state: state),
           ),
