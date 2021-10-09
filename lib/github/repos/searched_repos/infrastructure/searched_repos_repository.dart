@@ -11,7 +11,7 @@ class SearchedReposRepository {
 
   SearchedReposRepository(this._remoteService);
 
-  Future<Either<GithubFailure, Fresh<List<GithubRepo>>>> getStarredReposPage(
+  Future<Either<GithubFailure, Fresh<List<GithubRepo>>>> getSearchedReposPage(
       String query, int page) async {
     try {
       final remoteResponse = await _remoteService.getSearchedReposPage(query, page);
