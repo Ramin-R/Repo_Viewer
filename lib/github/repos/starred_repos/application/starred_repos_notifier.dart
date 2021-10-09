@@ -36,10 +36,6 @@ class StarredReposNotifier extends StateNotifier<StarredReposState> {
   int _page = 1;
 
   Future<void> getNextStarredReposPage() async {
-    state = StarredReposState.loadInProgress(state.repos, 30);
-    await Future.delayed(const Duration(seconds: 2));
-    state = StarredReposState.loadFailure(state.repos, const GithubFailure.api(404));
-    return;
     state = StarredReposState.loadInProgress(
       state.repos,
       PaginationConfig.itemsPerPage,
@@ -50,7 +46,6 @@ class StarredReposNotifier extends StateNotifier<StarredReposState> {
     failureOrRepos.fold((l) => state = StarredReposState.loadFailure(state.repos, l), (r) {
       _page++;
       state = StarredReposState.loadSuccess(
-        // state.repos.copyWith(entity: state.repos.entity..addAll(r.entity)),
         r.copyWith(entity: [...state.repos.entity, ...r.entity]),
         isNextPageAvailable: r.isNextPageAvailable ?? false,
       );
