@@ -32,9 +32,23 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
-      title: Text(widget.title),
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Text(
+            'Tap to search 👆',
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ],
+      ),
       hint: widget.hint,
-      body: widget.body,
+      body: FloatingSearchBarScrollNotifier(child: widget.body),
+      onSubmitted: widget.onShouldNavigateToResultPage,
       builder: (context, animation) {
         return Container();
       },
