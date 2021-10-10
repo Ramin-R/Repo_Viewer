@@ -20,7 +20,7 @@ class SearchHistoryRepository {
         )
         .onSnapshots(_sembastDatabase.instance)
         .map(
-          (records) => records.map((e) => e.value).toList(),
+          (records) => records.reversed.map((e) => e.value).toList(),
         );
   }
 
