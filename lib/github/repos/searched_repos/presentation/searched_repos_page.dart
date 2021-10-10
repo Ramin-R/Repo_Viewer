@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:repo_viewer/auth/shared/providers.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/core/presentation/paginated_repos_list_view.dart';
+import 'package:repo_viewer/search/presentation/search_bar.dart';
 
 class SearchedReposPage extends StatefulWidget {
   final String searchTerm;
@@ -30,21 +30,18 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.searchTerm),
-        actions: [
-          IconButton(
-            onPressed: () => context.read(authNotifierProvider.notifier).signOut(),
-            icon: const Icon(MdiIcons.logoutVariant),
-          ),
-        ],
-      ),
-      body: PaginatedReposListView(
-        reposNotifierProvider: searchedReposNotifierProvider,
-        getNextPage: (context) => context
-            .read(searchedReposNotifierProvider.notifier)
-            .getNextSearchedReposPage(widget.searchTerm),
-        noResultsMessage: "This is all we could find for your search term.",
+      body: SearchBar(
+        title: widget.searchTerm,
+        hint: 'Search all repositories',
+        onShouldNavigateToResultPage: (term) {}, // Todo
+        onSignOutButtonPressed: () => context.read(authNotifierProvider.notifier).signOut(),
+        body: PaginatedReposListView(
+          reposNotifierProvider: searchedReposNotifierProvider,
+          getNextPage: (context) => context
+              .read(searchedReposNotifierProvider.notifier)
+              .getNextSearchedReposPage(widget.searchTerm),
+          noResultsMessage: "This is all we could find for your search term.",
+        ),
       ),
     );
   }
