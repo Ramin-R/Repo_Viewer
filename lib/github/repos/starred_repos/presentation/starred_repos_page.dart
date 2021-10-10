@@ -35,11 +35,13 @@ class _StarredReposPageState extends State<StarredReposPage> {
         onShouldNavigateToResultPage: (String term) =>
             AutoRouter.of(context).push(SearchedReposRoute(searchTerm: term)),
         onSignOutButtonPressed: () => context.read(authNotifierProvider.notifier).signOut(),
-        body: PaginatedReposListView(
-          reposNotifierProvider: starredReposNotifierProvider,
-          getNextPage: (context) =>
-              context.read(starredReposNotifierProvider.notifier).getNextStarredReposPage(),
-          noResultsMessage: "That's about everything we could find in your starred repos.",
+        body: SafeArea(
+          child: PaginatedReposListView(
+            reposNotifierProvider: starredReposNotifierProvider,
+            getNextPage: (context) =>
+                context.read(starredReposNotifierProvider.notifier).getNextStarredReposPage(),
+            noResultsMessage: "That's about everything we could find in your starred repos.",
+          ),
         ),
       ),
     );
