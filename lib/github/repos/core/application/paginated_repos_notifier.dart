@@ -37,6 +37,12 @@ class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
   int _page = 1;
 
   @protected
+  void resetState() {
+    _page = 1;
+    state = PaginatedReposState.initial(Fresh.yes(entity: []));
+  }
+
+  @protected
   Future<void> getNextPage(RepositoryGetter getter) async {
     state = PaginatedReposState.loadInProgress(
       state.repos,
@@ -45,12 +51,15 @@ class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
 
     final failureOrRepos = await getter(_page);
 
-    failureOrRepos.fold((l) => state = PaginatedReposState.loadFailure(state.repos, l), (r) {
-      _page++;
-      state = PaginatedReposState.loadSuccess(
-        r.copyWith(entity: [...state.repos.entity, ...r.entity]),
-        isNextPageAvailable: r.isNextPageAvailable ?? false,
-      );
-    });
+    failureOrRepos.fold(
+      (l) => state = PaginatedReposState.loadFailure(state.repos, l),
+      (r) {
+        _page++;
+        state = PaginatedReposState.loadSuccess(
+          r.copyWith(entity: [...state.repos.entity, ...r.entity]),
+          isNextPageAvailable: r.isNextPageAvailable ?? false,
+        );
+      },
+    );
   }
 }
