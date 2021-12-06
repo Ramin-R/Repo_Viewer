@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:repo_viewer/search/shared/providers.dart';
 
-class SearchBar extends StatefulWidget {
+class SearchBar extends ConsumerStatefulWidget {
   final String title;
   final String hint;
   final Widget body;
@@ -23,14 +23,14 @@ class SearchBar extends StatefulWidget {
   _SearchBarState createState() => _SearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends ConsumerState<SearchBar> {
   late FloatingSearchBarController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = FloatingSearchBarController();
-    Future.microtask(() => context.read(searchHistoryNotifierProvider.notifier).watchSearchTerms());
+    Future.microtask(() => ref.read(searchHistoryNotifierProvider.notifier).watchSearchTerms());
   }
 
   @override
@@ -43,13 +43,13 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     void pushPageAndPutFirstInHistory(String searchTerm) {
       widget.onShouldNavigateToResultPage(searchTerm);
-      context.read(searchHistoryNotifierProvider.notifier).putSearchTermFirst(searchTerm);
+      ref.read(searchHistoryNotifierProvider.notifier).putSearchTermFirst(searchTerm);
       _controller.close();
     }
 
     void pushPageAndAddToHistory(String searchTerm) {
       widget.onShouldNavigateToResultPage(searchTerm);
-      context.read(searchHistoryNotifierProvider.notifier).addSearchTerm(searchTerm);
+      ref.read(searchHistoryNotifierProvider.notifier).addSearchTerm(searchTerm);
       _controller.close();
     }
 
@@ -72,7 +72,7 @@ class _SearchBarState extends State<SearchBar> {
       hint: widget.hint,
       body: FloatingSearchBarScrollNotifier(child: widget.body),
       onQueryChanged: (query) =>
-          context.read(searchHistoryNotifierProvider.notifier).watchSearchTerms(filter: query),
+          ref.read(searchHistoryNotifierProvider.notifier).watchSearchTerms(filter: query),
       onSubmitted: (query) => pushPageAndAddToHistory(query),
       actions: [
         FloatingSearchBarAction.icon(
@@ -127,7 +127,7 @@ class _SearchBarState extends State<SearchBar> {
                             trailing: CircularButton(
                               icon: const Icon(Icons.close),
                               onPressed: () {
-                                context
+                                ref
                                     .read(searchHistoryNotifierProvider.notifier)
                                     .deleteSearchTerm(term);
                               },

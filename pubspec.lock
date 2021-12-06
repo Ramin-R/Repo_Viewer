@@ -112,7 +112,7 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
+    version: "3.2.0"
   cached_network_image_platform_interface:
     dependency: transitive
     description:
@@ -210,7 +210,7 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -264,32 +264,70 @@ packages:
       name: flutter_cache_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.2"
+    version: "3.3.0"
   flutter_hooks:
     dependency: "direct main"
     description:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.0"
+    version: "0.18.1"
   flutter_riverpod:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "packages/flutter_riverpod"
-      ref: "147be70df096015af0633456a951d8f2f9c66dc9"
-      resolved-ref: "147be70df096015af0633456a951d8f2f9c66dc9"
-      url: "https://github.com/rrousselGit/river_pod.git"
-    source: git
-    version: "0.14.0+2"
+      name: flutter_riverpod
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   flutter_secure_storage:
     dependency: "direct main"
     description:
       name: flutter_secure_storage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.1"
+    version: "5.0.2"
+  flutter_secure_storage_linux:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  flutter_secure_storage_macos:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  flutter_secure_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  flutter_secure_storage_web:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  flutter_secure_storage_windows:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -331,12 +369,10 @@ packages:
   hooks_riverpod:
     dependency: "direct main"
     description:
-      path: "packages/hooks_riverpod"
-      ref: "147be70df096015af0633456a951d8f2f9c66dc9"
-      resolved-ref: "147be70df096015af0633456a951d8f2f9c66dc9"
-      url: "https://github.com/rrousselGit/river_pod.git"
-    source: git
-    version: "0.14.0+2"
+      name: hooks_riverpod
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   http:
     dependency: transitive
     description:
@@ -413,14 +449,14 @@ packages:
       name: material_design_icons_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.5955-rc.1"
+    version: "5.0.6595"
   material_floating_search_bar:
     dependency: "direct main"
     description:
       name: material_floating_search_bar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.4"
+    version: "0.3.6"
   meta:
     dependency: transitive
     description:
@@ -469,7 +505,21 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.7"
+  path_provider_android:
+    dependency: transitive
+    description:
+      name: path_provider_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.9"
+  path_provider_ios:
+    dependency: transitive
+    description:
+      name: path_provider_ios
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.7"
   path_provider_linux:
     dependency: transitive
     description:
@@ -555,14 +605,12 @@ packages:
     source: hosted
     version: "1.1.0"
   riverpod:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "packages/riverpod"
-      ref: "147be70df096015af0633456a951d8f2f9c66dc9"
-      resolved-ref: "147be70df096015af0633456a951d8f2f9c66dc9"
-      url: "https://github.com/rrousselGit/river_pod.git"
-    source: git
-    version: "0.14.0+1"
+      name: riverpod
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   rxdart:
     dependency: transitive
     description:
@@ -742,28 +790,28 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.3.1"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.15"
+    version: "2.4.0"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.8.0"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.14"
+    version: "2.5.0"
   win32:
     dependency: transitive
     description:

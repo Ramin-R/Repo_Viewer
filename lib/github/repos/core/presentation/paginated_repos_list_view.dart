@@ -37,7 +37,7 @@ class _PaginatedReposListViewState extends State<PaginatedReposListView> {
         final state = ref.watch(widget.reposNotifierProvider);
         return ProviderListener<PaginatedReposState>(
           provider: widget.reposNotifierProvider,
-          onChange: (context, state) {
+          onChange: (context, previousState, state) {
             state.map(
               initial: (_) => canLoadNextPage = false,
               loadInProgress: (_) => canLoadNextPage = false,

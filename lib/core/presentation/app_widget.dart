@@ -40,10 +40,10 @@ class AppWidget extends StatelessWidget {
     final appRouter = AppRouter();
     return ProviderListener(
       provider: initializationProvider,
-      onChange: (context, value) {},
+      onChange: (context, prevValue, value) {},
       child: ProviderListener<AuthState>(
         provider: authNotifierProvider,
-        onChange: (context, state) {
+        onChange: (context, previousState, state) {
           state.maybeMap(
             orElse: () {},
             authenticated: (_) {

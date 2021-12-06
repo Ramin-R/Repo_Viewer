@@ -7,22 +7,22 @@ import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/core/presentation/paginated_repos_list_view.dart';
 import 'package:repo_viewer/search/presentation/search_bar.dart';
 
-class SearchedReposPage extends StatefulWidget {
+class SearchedReposPage extends ConsumerStatefulWidget {
   final String searchTerm;
   const SearchedReposPage({Key? key, required this.searchTerm}) : super(key: key);
 
   @override
-  State<SearchedReposPage> createState() => _SearchedReposPageState();
+  ConsumerState<SearchedReposPage> createState() => _SearchedReposPageState();
 }
 
-class _SearchedReposPageState extends State<SearchedReposPage> {
+class _SearchedReposPageState extends ConsumerState<SearchedReposPage> {
   @override
   void initState() {
     super.initState();
 
     Future.microtask(
       () {
-        context
+        ref
             .read(searchedReposNotifierProvider.notifier)
             .getFirstSearchedReposPage(widget.searchTerm);
       },
@@ -39,10 +39,10 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
           SearchedReposRoute(searchTerm: term),
           predicate: (route) => route.settings.name == StarredReposRoute.name,
         ),
-        onSignOutButtonPressed: () => context.read(authNotifierProvider.notifier).signOut(),
+        onSignOutButtonPressed: () => ref.read(authNotifierProvider.notifier).signOut(),
         body: PaginatedReposListView(
           reposNotifierProvider: searchedReposNotifierProvider,
-          getNextPage: (context) => context
+          getNextPage: (context) => ref
               .read(searchedReposNotifierProvider.notifier)
               .getNextSearchedReposPage(widget.searchTerm),
           noResultsMessage: "This is all we could find for your search term.",

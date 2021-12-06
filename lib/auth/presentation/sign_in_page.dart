@@ -7,11 +7,11 @@ import 'package:repo_viewer/auth/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/core/presentation/routes/app_router.gr.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends ConsumerWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -35,7 +35,7 @@ class SignInPage extends StatelessWidget {
                   const SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: () {
-                      context.read(authNotifierProvider.notifier).signIn((authorizationUrl) async {
+                      ref.read(authNotifierProvider.notifier).signIn((authorizationUrl) async {
                         final completer = Completer<Uri>();
 
                         AutoRouter.of(context).push(

@@ -13,28 +13,24 @@ dependencies:
   flutter:
     sdk: flutter
   oauth2: ^2.0.0
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^5.0.2
   dartz: ^0.10.0
-  dio: ^4.0.0
-  flutter_hooks: ^0.16.0
-  hooks_riverpod:
-    git:
-      url: https://github.com/rrousselGit/river_pod.git
-      ref: 147be70df096015af0633456a951d8f2f9c66dc9
-      path: packages/hooks_riverpod
+  dio: ^4.0.4
+  flutter_hooks: ^0.18.1
+  hooks_riverpod: ^1.0.2
   freezed_annotation: ^0.14.3
-  webview_flutter: ^2.1.1
+  webview_flutter: ^2.3.1
   flash: ^2.0.3
   auto_route: ^2.4.2
-  material_design_icons_flutter: ^5.0.5955-rc.1
+  material_design_icons_flutter: ^5.0.6595
   json_annotation: ^4.1.0
   sembast: ^3.1.1
-  cached_network_image: ^3.1.0
-  path_provider: ^2.0.5
+  cached_network_image: ^3.2.0
+  path_provider: ^2.0.7
   path: ^1.8.0
   shimmer: ^2.0.0
   pretty_dio_logger: ^1.1.1
-  material_floating_search_bar: ^0.3.4
+  material_floating_search_bar: ^0.3.6
 
 dev_dependencies:
   flutter_test:
@@ -45,19 +41,6 @@ dev_dependencies:
   freezed: ^0.14.5
   json_serializable: ^5.0.2
 
-
-
-dependency_overrides:
-  flutter_riverpod:
-    git:
-      url: https://github.com/rrousselGit/river_pod.git
-      ref: 147be70df096015af0633456a951d8f2f9c66dc9
-      path: packages/flutter_riverpod
-  riverpod:
-    git:
-      url: https://github.com/rrousselGit/river_pod.git
-      ref: 147be70df096015af0633456a951d8f2f9c66dc9
-      path: packages/riverpod
 
 flutter:
   uses-material-design: true

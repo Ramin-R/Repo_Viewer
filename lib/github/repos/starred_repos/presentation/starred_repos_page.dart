@@ -7,21 +7,21 @@ import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/core/presentation/paginated_repos_list_view.dart';
 import 'package:repo_viewer/search/presentation/search_bar.dart';
 
-class StarredReposPage extends StatefulWidget {
+class StarredReposPage extends ConsumerStatefulWidget {
   const StarredReposPage({Key? key}) : super(key: key);
 
   @override
-  State<StarredReposPage> createState() => _StarredReposPageState();
+  ConsumerState<StarredReposPage> createState() => _StarredReposPageState();
 }
 
-class _StarredReposPageState extends State<StarredReposPage> {
+class _StarredReposPageState extends ConsumerState<StarredReposPage> {
   @override
   void initState() {
     super.initState();
 
     Future.microtask(
       () {
-        context.read(starredReposNotifierProvider.notifier).getNextStarredReposPage();
+        ref.read(starredReposNotifierProvider.notifier).getNextStarredReposPage();
       },
     );
   }
@@ -34,11 +34,11 @@ class _StarredReposPageState extends State<StarredReposPage> {
         hint: 'Search all repositories',
         onShouldNavigateToResultPage: (String term) =>
             AutoRouter.of(context).push(SearchedReposRoute(searchTerm: term)),
-        onSignOutButtonPressed: () => context.read(authNotifierProvider.notifier).signOut(),
+        onSignOutButtonPressed: () => ref.read(authNotifierProvider.notifier).signOut(),
         body: PaginatedReposListView(
           reposNotifierProvider: starredReposNotifierProvider,
           getNextPage: (context) =>
-              context.read(starredReposNotifierProvider.notifier).getNextStarredReposPage(),
+              ref.read(starredReposNotifierProvider.notifier).getNextStarredReposPage(),
           noResultsMessage: "That's about everything we could find in your starred repos.",
         ),
       ),
