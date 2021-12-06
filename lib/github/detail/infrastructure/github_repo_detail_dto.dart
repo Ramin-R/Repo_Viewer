@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:repo_viewer/github/detail/domain/github_repo_detail.dart';
+import 'package:sembast/timestamp.dart';
 
 part 'github_repo_detail_dto.freezed.dart';
 part 'github_repo_detail_dto.g.dart';
@@ -21,4 +22,10 @@ class GithubRepoDetailDTO with _$GithubRepoDetailDTO {
         html: html,
         starred: starred,
       );
+
+  Map<String, dynamic> toSembast() {
+    final json = toJson();
+    json['lastUsed'] = Timestamp.now();
+    return json;
+  }
 }
