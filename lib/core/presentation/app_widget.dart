@@ -62,10 +62,15 @@ class AppWidget extends StatelessWidget {
         },
         child: MaterialApp.router(
           title: 'Repo Viewer',
+          theme: _setupThemeData(),
           routerDelegate: appRouter.delegate(),
           routeInformationParser: appRouter.defaultRouteParser(),
         ),
       ),
     );
+  }
+
+  ThemeData _setupThemeData() {
+    return ThemeData(primaryColor: Colors.grey.shade50);
   }
 }
