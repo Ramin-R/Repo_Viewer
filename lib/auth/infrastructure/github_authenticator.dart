@@ -7,6 +7,7 @@ import 'package:repo_viewer/auth/domain/auth_failure.dart';
 import 'package:repo_viewer/auth/infrastructure/credentials_storage/credentials_storage.dart';
 import 'package:repo_viewer/core/infrastructure/dio_extensions.dart';
 import 'package:repo_viewer/core/shared/encoders.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class GithubOAuthHttpClient extends http.BaseClient {
   final httpClient = http.Client();
@@ -23,8 +24,8 @@ class GithubAuthenticator {
 
   GithubAuthenticator(this._credentialsStorage, this._dio);
 
-  static const clientId = '91cbfec1c06dc379532b';
-  static const clientSecret = 'f93c2e0ae39b18d0d6e9315e863ad45b091c8563';
+  static final clientId = dotenv.env['CLIENT_ID'];
+  static final clientSecret = dotenv.env['CLIENT_SECRET'];
   static const scopes = ['read:user', 'repo'];
   static final authorizationEndpoint = Uri.parse('https://github.com/login/oauth/authorize');
   static final tokenEndpoint = Uri.parse('https://github.com/login/oauth/access_token');
@@ -53,7 +54,7 @@ class GithubAuthenticator {
 
   AuthorizationCodeGrant createGrant() {
     return AuthorizationCodeGrant(
-      clientId,
+      clientId!,
       authorizationEndpoint,
       tokenEndpoint,
       secret: clientSecret,

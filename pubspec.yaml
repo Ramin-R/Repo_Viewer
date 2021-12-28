@@ -31,6 +31,7 @@ dependencies:
   shimmer: ^2.0.0
   pretty_dio_logger: ^1.1.1
   material_floating_search_bar: ^0.3.6
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -44,3 +45,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - .env
